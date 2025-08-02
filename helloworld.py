@@ -1,7 +1,8 @@
-#my first python APP
+#Python-learning coding
 
-#just write text in terminal, play sample and open external attached image
-
+#This is my very first python APP.
+#What it does? It combines several audiovideo things mixed together. 
+#After run it will write some text in terminal, then play some sound and in the final it opens image with applied effect on it.
 
 #used libraries
 import pygame
@@ -14,8 +15,6 @@ from PIL import Image, ImageEnhance
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-
-
 #text code
 print("Image will be viewed immediately after playing sound....😀 so calm down and take it easy my friend.")
 
@@ -24,32 +23,28 @@ pygame.mixer.init()
 pygame.mixer.music.load("sample.wav")
 pygame.mixer.music.play()
 
-
-# image code
+#image code
 pygame.init()
 
-# Cesta k obrázku
 image_path = "ascii.png"
 if not os.path.exists(image_path):
     print(f"Obrázek '{image_path}' nebyl nalezen.")
     sys.exit(1)
 
-# PŘED convert_alpha() vytvoř okno (video mód)
-# Nejprve načti velikost obrázku
+#video mode code
 temp_img = pygame.image.load(image_path)
 img_width, img_height = temp_img.get_size()
 
-# Teď nastav okno
+#window settings code
 screen = pygame.display.set_mode((img_width, img_height))
 pygame.display.set_caption("Vlnící se obrázek")
 
-# A teprve teď použij convert_alpha() – funguje až po set_mode
+#convert image code
 original_img = temp_img.convert_alpha()
-
 
 clock = pygame.time.Clock()
 
-# Funkce pro vytvoření vlnícího efektu
+#image fx code
 def wave_effect(img, t):
     wave_surface = pygame.Surface((img_width, img_height), pygame.SRCALPHA)
 
@@ -60,7 +55,7 @@ def wave_effect(img, t):
 
     return wave_surface
 
-# Smyčka
+#loop code
 running = True
 start_time = time.time()
 while running:
@@ -70,10 +65,10 @@ while running:
 
     t = time.time() - start_time
 
-    # Vlnící se obrázek
+    #image fx wave code
     distorted_img = wave_effect(original_img, t * 5)  # zrychli čas
 
-    # Vykreslení
+    #image draw code
     screen.fill((0, 0, 0))
     screen.blit(distorted_img, (0, 0))
     pygame.display.flip()
@@ -81,5 +76,3 @@ while running:
     clock.tick(60)
 
 pygame.quit()
-
-
