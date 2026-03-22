@@ -1,23 +1,26 @@
-# Python Load Test APP#
-# homework session by tempo&no brain#
-
+# ------------------------------
+# DIGITAL GARAGE SW TOOLS
+# ------------------------------
+# Python Stress Test APP
+# DevLAB #onlyhardcore
+# Created in homework sessions by tempo&brain 26'
+# ------------------------------
+# IMPORT LIBRARIES
+# ------------------------------
 import random
 import time
 import string
 import csv
 import os
 import sys
-
 # ------------------------------
-# KONFIGURACE
+# KONFIGURATION
 # ------------------------------
 NUM_REQUESTS = 50  # Počet requestů na auto
 DELAY = 0.1  # Pauza mezi requesty (s)
 MAX_CARS = 70  # Počet simulovaných aut pro zátěž
-
-
 # ------------------------------
-# TŘÍDA SIMULOVANÉHO AUTA
+# SIMULATED CAR 
 # ------------------------------
 class CarSimulator:
     def __init__(self, vin):
@@ -54,9 +57,8 @@ class CarSimulator:
         self.firmware = data.get("firmware", self.firmware)
         self.user_settings.update(data.get("user_settings", {}))
 
-
 # ------------------------------
-# FUNKCE
+# DEFINITIOM OF uSED FUNCTIONS
 # ------------------------------
 def generate_vin():
     chars = string.ascii_uppercase.replace("I", "").replace("O", "") + string.digits
@@ -134,7 +136,7 @@ def simulate_test(cars, test_type="backend"):
             )
             latency = round(time.time() - start_time, 3)
 
-            # Simulace chyby: latency > 0.05 s
+# Simulation of Bug: latency > 0.05 s
             is_error = latency > 0.05
 
             results.append(
@@ -149,7 +151,7 @@ def simulate_test(cars, test_type="backend"):
                 }
             )
 
-            # Výpis textově bez barev
+# Results in text form monochromatic
             if is_error:
                 print(
                     f"[ERROR] [{car.vin}] Req {i} | Firmware: {car.firmware} | "
@@ -180,7 +182,7 @@ def print_summary(results):
     print(f"Průměrná latence: {round(avg_latency, 3)}s")
     print(f"Max latence: {max_latency}s")
 
-    # Detail chyb
+# Detail of Bug
     if failed > 0:
         print("\n--- Detail chyb ---")
         for r in results:
@@ -192,7 +194,7 @@ def print_summary(results):
 
 
 # ------------------------------
-# HLAVNÍ PROGRAM
+# MAIN PROGRAM LOOP
 # ------------------------------
 if __name__ == "__main__":
     show_app_info()  # <<< Zobrazíme text hned po spuštění
@@ -200,7 +202,7 @@ if __name__ == "__main__":
     vins = wizard_load_vins()
     cars = [CarSimulator(vin) for vin in vins]
 
-    # Přidání dalších aut pro zátěž, pokud je INCAR test
+    # Adding of more cars in case it is a full stress tes - INCAR test
     if test_type == "2" and len(cars) < MAX_CARS:
         while len(cars) > MAX_CARS:
             cars.append(CarSimulator(generate_vin()))
@@ -211,3 +213,5 @@ if __name__ == "__main__":
 
     print_summary(results)
     sys.exit(0)  
+
+# END OF CODE/HELL STARTs HERE
