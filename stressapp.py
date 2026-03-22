@@ -198,7 +198,7 @@ def print_summary(results):
 # MAIN PROGRAM LOOP
 # ------------------------------
 if __name__ == "__main__":
-    show_app_info()  # <<< Zobrazíme text hned po spuštění
+    show_app_info()  # <<< Displaying of text immediately after first APP Run
     test_type = wizard_select_test_type()
     vins = wizard_load_vins()
     cars = [CarSimulator(vin) for vin in vins]
@@ -215,4 +215,5 @@ if __name__ == "__main__":
     print_summary(results)
     sys.exit(0)  
 
-# END OF CODE/HELL STARTs HERE
+# END OF CODE/HELL STARTs HERE My DEAR #
+
