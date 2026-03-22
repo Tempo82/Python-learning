@@ -14,13 +14,14 @@ import csv
 import os
 import sys
 # ------------------------------
-# KONFIGURATION
+# KONFIGURATION OF REQS/DELAY/CARS
 # ------------------------------
-NUM_REQUESTS = 50  # Počet requestů na auto
-DELAY = 0.1  # Pauza mezi requesty (s)
-MAX_CARS = 70  # Počet simulovaných aut pro zátěž
+NUM_REQUESTS = 50  # number of requests sent per car
+DELAY = 0.1  # Pause between sent requests in (s)
+MAX_CARS = 70  # number of simulated Cars in Stress Test 
+# 
 # ------------------------------
-# SIMULATED CAR 
+# SIMULATED CAR DEFINITION
 # ------------------------------
 class CarSimulator:
     def __init__(self, vin):
@@ -58,7 +59,7 @@ class CarSimulator:
         self.user_settings.update(data.get("user_settings", {}))
 
 # ------------------------------
-# DEFINITIOM OF uSED FUNCTIONS
+# DEFINITIOM OF USED FUNCTIONS
 # ------------------------------
 def generate_vin():
     chars = string.ascii_uppercase.replace("I", "").replace("O", "") + string.digits
